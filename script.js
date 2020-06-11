@@ -28,77 +28,89 @@
 
     let currentPlayer = "player1";
     let columns = $(".column");
-    let allSlots = columns.children();
+    let slots = columns.children();
+    let victory = false;
 
     columns.on("click", function (e) {
         // Slots of Selected column
         let col = $(e.currentTarget);
         let slotsInCol = col.children();
 
-        // Loop over the slots from bottom row to top row to find the free slot.
-        for (var i = slotsInCol.length - 1; i >= 0; i--) {
-            if (
-                !slotsInCol.eq(i).hasClass("player1") &&
-                !slotsInCol.eq(i).hasClass("player2")
-            ) {
-                slotsInCol.eq(i).addClass(currentPlayer);
-                break;
-            }
-        }
-
-        let slotsInRow = $(".row" + i);
-
-        if (i === -1) {
-            return;
-        }
-        // Column Victory
-        let whoWonHtml = "";
-        if (checkForVictory(slotsInCol)) {
-            if (currentPlayer === "player1") {
-                console.log("Column Victory, Player 1 Wins!");
-                whoWonHtml += "<h2>Player 1 wins!</h2>";
-                $(".whoWon").html(whoWonHtml);
-                $(".whoWonWrapper").addClass("on");
-                score("player1");
-            } else {
-                console.log("Column Victory, Player 2 Wins!");
-                whoWinWrapperHtml += "<h2>Player 2 wins!</h2>";
-                $(".whoWonWrapper").html(whoWinWrapperHtml);
-                $(".whoWonWrapper").addClass("on");
-                score("player2");
+        if (!victory) {
+            // Loop over the slots from bottom row to top row to find the free slot.
+            for (var i = slotsInCol.length - 1; i >= 0; i--) {
+                if (
+                    !slotsInCol.eq(i).hasClass("player1") &&
+                    !slotsInCol.eq(i).hasClass("player2")
+                ) {
+                    slotsInCol.eq(i).addClass(currentPlayer);
+                    break;
+                }
             }
 
-            // Row Victory
-        } else if (checkForVictory(slotsInRow)) {
-            if (currentPlayer === "player1") {
-                console.log("Rows Victory, Player 1 Wins!");
-                whoWinWrapperHtml += "<h2>Player 1 wins!</h2>";
-                $(".whoWonWrapper").html(whoWinWrapperHtml);
-                $(".whoWonWrapper").addClass("on");
-                score("player1");
-            } else {
-                console.log("Rows Victory, Player 2 Wins!");
-                whoWinWrapperHtml += "<h2>Player 2 wins!</h2>";
-                $(".whoWonWrapper").html(whoWinWrapperHtml);
-                $(".whoWonWrapper").addClass("on");
-                score("player2");
+            if (i === -1) {
+                return;
             }
-        } else if (checkForDiagonalVictory(allSlots)) {
-            if (currentPlayer === "player1") {
-                console.log("Diagonal Victory, Player 1 Wins!");
-                whoWinWrapperHtml += "<h2>Player 1 wins!</h2>";
-                $(".whoWonWrapper").html(whoWinWrapperHtml);
-                $(".whoWonWrapper").addClass("on");
-                score("player1");
+
+            let slotsInRow = $(".row" + i);
+
+            // Column Victory
+            let whoWonHtml = "";
+            if (checkForVictory(slotsInCol)) {
+                if (currentPlayer === "player1") {
+                    console.log("Column Victory, Manny Wins!");
+                    whoWonHtml += "<h2>Manny Wins!</h2>";
+                    $(".whoWon").html(whoWonHtml);
+                    $(".whoWonWrapper").addClass("on");
+                    score("player1");
+                    victory = true;
+                } else {
+                    console.log("Column Victory, Griffin Wins!");
+                    whoWonHtml += "<h2>Griffin Wins!</h2>";
+                    $(".whoWon").html(whoWonHtml);
+                    $(".whoWonWrapper").addClass("on");
+                    score("player2");
+                    victory = true;
+                }
+
+                // Row Victory
+            } else if (checkForVictory(slotsInRow)) {
+                if (currentPlayer === "player1") {
+                    console.log("Rows Victory, Manny Wins!");
+                    whoWonHtml += "<h2>Manny Wins!</h2>";
+                    $(".whoWon").html(whoWonHtml);
+                    $(".whoWonWrapper").addClass("on");
+                    score("player1");
+                    victory = true;
+                } else {
+                    console.log("Rows Victory, Griffin Wins!");
+                    whoWonHtml += "<h2>Griffin Wins!</h2>";
+                    $(".whoWon").html(whoWonHtml);
+                    $(".whoWonWrapper").addClass("on");
+                    score("player2");
+                    victory = true;
+                }
+            } else if (checkForDiagonalVictory(slots)) {
+                if (currentPlayer === "player1") {
+                    console.log("Diagonal Victory, Manny Wins!");
+                    whoWonHtml += "<h2>Manny Wins!</h2>";
+                    $(".whoWon").html(whoWonHtml);
+                    $(".whoWonWrapper").addClass("on");
+                    score("player1");
+                    victory = true;
+                } else {
+                    console.log("Diagonal Victory, Griffin Wins!");
+                    whoWonHtml += "<h2>Griffin Wins!</h2>";
+                    $(".whoWon").html(whoWonHtml);
+                    $(".whoWonWrapper").addClass("on");
+                    score("player2");
+                    victory = true;
+                }
             } else {
-                console.log("Diagonal Victory, Player 2 Wins!");
-                whoWinWrapperHtml += "<h2>Player 2 wins!</h2>";
-                $(".whoWonWrapper").html(whoWinWrapperHtml);
-                $(".whoWonWrapper").addClass("on");
-                score("player2");
+                switchPlayer();
             }
         } else {
-            switchPlayer();
+            return;
         }
     });
 
@@ -126,7 +138,6 @@
                 if (slots.eq(index).hasClass(currentPlayer)) {
                     count++;
                     if (count === 4) {
-                        score();
                         return true;
                     }
                 } else {
@@ -136,22 +147,27 @@
         }
     }
 
-    let player1Score = $(".player1Score");
-    let player2Score = $(".player2Score");
+    let player1Score = document.querySelector(".player1Score");
+    let player2Score = document.querySelector(".player2Score");
 
     function score(player) {
         if (player === "player1") {
-            player1Score.innerHTML += 1;
+            player1Score.innerHTML = 1;
         } else {
-            player2Score.innerHTML += 1;
+            player2Score.innerHTML = 1;
         }
     }
 
     $(".playAgain").on("click", function () {
-        for (var s = 0; s < allSlots.length; s++) {
-            allSlots.eq(s).hasClass("player1")
-                ? allSlots.eq(s).removeClass("player1")
-                : allSlots.eq(s).removeClass("player2");
+        for (var y = 0; y < slots.length; y++) {
+            victory = false;
+            player1Score.innerHTML = 0;
+            player2Score.innerHTML = 0;
+            $(".whoWonWrapper").removeClass("on");
+
+            slots.eq(y).hasClass("player1")
+                ? slots.eq(y).removeClass("player1")
+                : slots.eq(y).removeClass("player2");
         }
     });
 

@@ -4,9 +4,14 @@
 }
 body {
     background-image: url(./assets/s-o-c-i-a-l-c-u-t-gREi-9tI5Mg-unsplash.jpg);
+}
+
+.wrapper {
+    background-color: rgba(255, 255, 255, 0.287);
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto auto;
+    height: 100vh;
 }
 .title {
     grid-area: 1/1/2/2;
@@ -37,11 +42,15 @@ body {
 }
 
 .player1 {
-    background-color: rgb(58, 128, 128);
+    background-image: url(./assets/owl1.png);
+    background-size: cover;
+    background-position: center;
 }
 
 .player2 {
-    background-color: rgba(255, 255, 0, 0.589);
+    background-image: url(./assets/owl2.png);
+    background-size: cover;
+    background-position: center;
 }
 
 table {
@@ -78,7 +87,7 @@ th {
 .whoWon {
     border-radius: 50%;
     border: 3px solid rgb(46, 101, 90);
-    background-color: rgba(230, 149, 102, 0.77);
+    background-color: rgba(230, 149, 102, 0.507);
     height: 200px;
     width: 200px;
     display: flex;
