@@ -23,14 +23,12 @@ body {
     display: flex;
 }
 .slot {
-    /* background-color: darkblue; */
     height: 100px;
     width: 100px;
     overflow: hidden;
 }
 
 .hole {
-    /* background-color: ivory; */
     height: 80px;
     width: 80px;
     transform: translate(-30px, -30px);
@@ -39,11 +37,11 @@ body {
 }
 
 .player1 {
-    background-color: red;
+    background-color: rgb(58, 128, 128);
 }
 
 .player2 {
-    background-color: yellow;
+    background-color: rgba(255, 255, 0, 0.589);
 }
 
 table {
@@ -70,11 +68,16 @@ th {
     width: 40px;
 }
 .whoWonWrapper {
+    visibility: hidden;
     grid-area: 3/2/4/3;
     justify-self: center;
+}
+.whoWonWrapper.on {
+    visibility: visible;
+}
+.whoWon {
     border-radius: 50%;
     border: 3px solid rgb(46, 101, 90);
-    visibility: hidden;
     background-color: rgba(230, 149, 102, 0.77);
     height: 200px;
     width: 200px;
@@ -82,10 +85,19 @@ th {
     justify-content: center;
     align-items: center;
     color: rgb(46, 101, 90);
-}
-.whoWonWrapper.on {
-    visibility: visible;
-}
-.whoWon {
     text-align: center;
+    font-size: 22px;
+}
+.playAgain {
+    border-radius: 6px;
+    background-color: teal;
+    border: 1px solid ivory;
+    justify-self: center;
+    grid-area: 3/2/4/3;
+    justify-content: center;
+    color: white;
+    height: 60px;
+    width: 200px;
+    font-size: 22px;
+    margin-top: 20px;
 }

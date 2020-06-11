@@ -52,18 +52,20 @@
             return;
         }
         // Column Victory
-        let whoWinWrapperHtml = "";
+        let whoWonHtml = "";
         if (checkForVictory(slotsInCol)) {
             if (currentPlayer === "player1") {
                 console.log("Column Victory, Player 1 Wins!");
-                whoWinWrapperHtml += "<h2>Player 1 wins!</h2>";
-                $(".whoWonWrapper").html(whoWinWrapperHtml);
+                whoWonHtml += "<h2>Player 1 wins!</h2>";
+                $(".whoWon").html(whoWonHtml);
                 $(".whoWonWrapper").addClass("on");
+                score("player1");
             } else {
                 console.log("Column Victory, Player 2 Wins!");
                 whoWinWrapperHtml += "<h2>Player 2 wins!</h2>";
                 $(".whoWonWrapper").html(whoWinWrapperHtml);
                 $(".whoWonWrapper").addClass("on");
+                score("player2");
             }
 
             // Row Victory
@@ -73,11 +75,13 @@
                 whoWinWrapperHtml += "<h2>Player 1 wins!</h2>";
                 $(".whoWonWrapper").html(whoWinWrapperHtml);
                 $(".whoWonWrapper").addClass("on");
+                score("player1");
             } else {
                 console.log("Rows Victory, Player 2 Wins!");
                 whoWinWrapperHtml += "<h2>Player 2 wins!</h2>";
                 $(".whoWonWrapper").html(whoWinWrapperHtml);
                 $(".whoWonWrapper").addClass("on");
+                score("player2");
             }
         } else if (checkForDiagonalVictory(allSlots)) {
             if (currentPlayer === "player1") {
@@ -85,11 +89,13 @@
                 whoWinWrapperHtml += "<h2>Player 1 wins!</h2>";
                 $(".whoWonWrapper").html(whoWinWrapperHtml);
                 $(".whoWonWrapper").addClass("on");
+                score("player1");
             } else {
                 console.log("Diagonal Victory, Player 2 Wins!");
                 whoWinWrapperHtml += "<h2>Player 2 wins!</h2>";
                 $(".whoWonWrapper").html(whoWinWrapperHtml);
                 $(".whoWonWrapper").addClass("on");
+                score("player2");
             }
         } else {
             switchPlayer();
@@ -120,6 +126,7 @@
                 if (slots.eq(index).hasClass(currentPlayer)) {
                     count++;
                     if (count === 4) {
+                        score();
                         return true;
                     }
                 } else {
@@ -129,13 +136,24 @@
         }
     }
 
-    // $("#again").on("click", function () {
-    //     for (var s = 0; s < allSlots.length; s++) {
-    //         allSlots.eq(s).hasClass("player1")
-    //             ? allSlots.eq(s).removeClass("player1")
-    //             : allSlots.eq(s).removeClass("player2");
-    //     }
-    // });
+    let player1Score = $(".player1Score");
+    let player2Score = $(".player2Score");
+
+    function score(player) {
+        if (player === "player1") {
+            player1Score.innerHTML += 1;
+        } else {
+            player2Score.innerHTML += 1;
+        }
+    }
+
+    $(".playAgain").on("click", function () {
+        for (var s = 0; s < allSlots.length; s++) {
+            allSlots.eq(s).hasClass("player1")
+                ? allSlots.eq(s).removeClass("player1")
+                : allSlots.eq(s).removeClass("player2");
+        }
+    });
 
     function switchPlayer() {
         currentPlayer === "player1"
