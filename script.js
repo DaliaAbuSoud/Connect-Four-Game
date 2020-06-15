@@ -43,7 +43,12 @@
                     !slotsInCol.eq(i).hasClass("player1") &&
                     !slotsInCol.eq(i).hasClass("player2")
                 ) {
-                    slotsInCol.eq(i).addClass(currentPlayer);
+                    slotsInCol
+                        .eq(i)
+                        .addClass(
+                            `${currentPlayer} animate__animated animate__pulse`
+                        );
+
                     break;
                 }
             }
@@ -61,14 +66,22 @@
                     console.log("Column Victory, Manny Wins!");
                     whoWonHtml += "<h2>Manny Wins!</h2>";
                     $(".whoWon").html(whoWonHtml);
+                    $(".whoWon").addClass("animate__animated animate__flip");
                     $(".whoWonWrapper").addClass("on");
+                    $(".player1Score").addClass(
+                        "animate__animated animate__heartBeat"
+                    );
                     score("player1");
                     victory = true;
                 } else {
                     console.log("Column Victory, Griffin Wins!");
                     whoWonHtml += "<h2>Griffin Wins!</h2>";
                     $(".whoWon").html(whoWonHtml);
+                    $(".whoWon").addClass("animate__animated animate__flip");
                     $(".whoWonWrapper").addClass("on");
+                    $(".player2Score").addClass(
+                        "animate__animated animate__heartBeat"
+                    );
                     score("player2");
                     victory = true;
                 }
@@ -79,14 +92,22 @@
                     console.log("Rows Victory, Manny Wins!");
                     whoWonHtml += "<h2>Manny Wins!</h2>";
                     $(".whoWon").html(whoWonHtml);
+                    $(".whoWon").addClass("animate__animated animate__flip");
                     $(".whoWonWrapper").addClass("on");
+                    $(".player1Score").addClass(
+                        "animate__animated animate__heartBeat"
+                    );
                     score("player1");
                     victory = true;
                 } else {
                     console.log("Rows Victory, Griffin Wins!");
                     whoWonHtml += "<h2>Griffin Wins!</h2>";
                     $(".whoWon").html(whoWonHtml);
+                    $(".whoWon").addClass("animate__animated animate__flip");
                     $(".whoWonWrapper").addClass("on");
+                    $(".player2Score").addClass(
+                        "animate__animated animate__heartBeat"
+                    );
                     score("player2");
                     victory = true;
                 }
@@ -95,14 +116,22 @@
                     console.log("Diagonal Victory, Manny Wins!");
                     whoWonHtml += "<h2>Manny Wins!</h2>";
                     $(".whoWon").html(whoWonHtml);
+                    $(".whoWon").addClass("animate__animated animate__flip");
                     $(".whoWonWrapper").addClass("on");
+                    $(".player1Score").addClass(
+                        "animate__animated animate__heartBeat"
+                    );
                     score("player1");
                     victory = true;
                 } else {
                     console.log("Diagonal Victory, Griffin Wins!");
                     whoWonHtml += "<h2>Griffin Wins!</h2>";
                     $(".whoWon").html(whoWonHtml);
+                    $(".whoWon").addClass("animate__animated animate__flip");
                     $(".whoWonWrapper").addClass("on");
+                    $(".player2Score").addClass(
+                        "animate__animated animate__heartBeat"
+                    );
                     score("player2");
                     victory = true;
                 }
@@ -164,6 +193,13 @@
             player1Score.innerHTML = 0;
             player2Score.innerHTML = 0;
             $(".whoWonWrapper").removeClass("on");
+            $(".whoWon").removeClass("animate__animated animate__flip");
+            $(".player1Score").removeClass(
+                "animate__animated animate__heartBeat"
+            );
+            $(".player2Score").removeClass(
+                "animate__animated animate__heartBeat"
+            );
 
             slots.eq(y).hasClass("player1")
                 ? slots.eq(y).removeClass("player1")

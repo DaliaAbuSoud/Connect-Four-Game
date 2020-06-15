@@ -1,6 +1,7 @@
 * {
     margin: 0;
-    font-family: fantasy;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 body {
     background-image: url(./assets/s-o-c-i-a-l-c-u-t-gREi-9tI5Mg-unsplash.jpg);
@@ -19,6 +20,7 @@ body {
     color: darkred;
     font-size: 50px;
     margin: 30px;
+    font-weight: bold;
 }
 .container {
     grid-area: 2/1/4/2;
@@ -71,6 +73,7 @@ td {
 th {
     height: 50px;
     border: 2px solid #4a686e;
+    font-weight: bold;
 }
 .playerIcone {
     height: 40px;
@@ -109,4 +112,8 @@ th {
     width: 200px;
     font-size: 22px;
     margin-top: 20px;
+    cursor: pointer;
+}
+.playAgain:hover {
+    transform: scale(1.2);
 }
